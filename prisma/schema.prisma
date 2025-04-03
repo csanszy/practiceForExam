@@ -1,0 +1,26 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model todo {
+  id                   Int    @id @default(autoincrement())
+  title                String @db.VarChar(255)
+  task                 String @db.VarChar(255)
+  user                 Int
+  user_todo_userTouser user   @relation("todo_userTouser", fields: [user], references: [id], onDelete: Cascade, map: "todo_ibfk_1")
+
+  @@index([user], map: "user")
+}
+
+model user {
+  id                   Int      @id @default(autoincrement())
+  name                 String   @db.VarChar(255)
+  birthdate            DateTime @db.Date
+  todo_todo_userTouser todo[]   @relation("todo_userTouser")
+}
