@@ -21,6 +21,7 @@
     { title: 'Title', align: 'end', key: 'title' },
     { title: 'Task', align: 'end', key: 'task' },
     { title: 'UserId', align: 'end', key: 'user' },
+    { title: 'UserName', align: 'end', key: 'user_name' },
   ]);
 
   const dialog = ref(false);
@@ -29,7 +30,11 @@
   const fetchtodos = async () => {
     try {
       const response = await axios.get("http://localhost:3300/api/todo");
-      todos.value = response.data;
+      //todos.value = response.data;
+      todos.value = response.data.map(todo => ({
+      ...todo,
+      user_name: todo.user_todo_userTouser?.name || 'N/A', // Extract user_name
+    }));
       console.log(todos.value);
     } catch (error) {
       console.error("Error fetching products:", error);

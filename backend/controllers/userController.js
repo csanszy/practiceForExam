@@ -10,7 +10,7 @@ const getAlluser = async (req, res) => {
     }
   };
  
-  const postUser = async (req, res) => {
+ /* const postUser = async (req, res) => {
     try {
       const { name, birthdate } = req.body;
   
@@ -32,9 +32,9 @@ const getAlluser = async (req, res) => {
       console.error(error);
       res.status(500).json({ error: "Hiba történt a felhasználó létrehozásakor." });
     }
-  }
-
-/*const postUser = async (req, res) => {
+  }*/
+ 
+const postUser = async (req, res) => {
     try {
       const { name, birthdate } = req.body;
       const newUser = await prisma.user.create({
@@ -49,7 +49,7 @@ const getAlluser = async (req, res) => {
         res.status(500).json({ error: "Hiba történt a felhasználó létrehozásakor." });
       
     }
-}*/
+}
 
 
 const putUser = async (req, res) => {
