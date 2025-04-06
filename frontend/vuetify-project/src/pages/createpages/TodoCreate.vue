@@ -71,6 +71,7 @@
       user: selectedUser.value // Use the selected user's ID
     });
 
+    alert('Data saved successfully!');
     console.log('Data saved:', response.data);
   } catch (error) {
     console.error("Error saving data:", error);
