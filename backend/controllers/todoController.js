@@ -16,6 +16,7 @@ const getAlltodo = async (req, res) => {
   
 
 const postTodo = async (req, res) => {
+  console.log(req.body);
     try {
         const data = await prisma.todo.create({ data: req.body });
         res.json(data);
@@ -23,7 +24,7 @@ const postTodo = async (req, res) => {
         console.error(err);
         res.status(500).json({ error: "SZAR VAGY" });
     }
-
+}
     //#################################################################
     /*
     {
@@ -47,7 +48,7 @@ const postTodo = async (req, res) => {
         console.log(err);
       res.json("szar vagy");
       }*/
-}
+
 
 const updateTodo =  async (req, res) => {
     /*try {

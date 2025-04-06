@@ -10,7 +10,31 @@ const getAlluser = async (req, res) => {
     }
   };
  
-const postUser = async (req, res) => {
+  const postUser = async (req, res) => {
+    try {
+      const { name, birthdate } = req.body;
+  
+      // Check if birthdate is a valid date
+      const validBirthdate = new Date(birthdate);
+      if (isNaN(validBirthdate.getTime())) {
+        return res.status(400).json({ error: "Invalid date format" });
+      }
+  
+      const newUser = await prisma.user.create({
+        data: {
+          name,
+          birthdate: validBirthdate,
+        }
+      });
+  
+      res.json(newUser);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Hiba történt a felhasználó létrehozásakor." });
+    }
+  }
+
+/*const postUser = async (req, res) => {
     try {
       const { name, birthdate } = req.body;
       const newUser = await prisma.user.create({
@@ -25,7 +49,7 @@ const postUser = async (req, res) => {
         res.status(500).json({ error: "Hiba történt a felhasználó létrehozásakor." });
       
     }
-}
+}*/
 
 
 const putUser = async (req, res) => {
